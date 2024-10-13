@@ -1,0 +1,152 @@
+-- Create the Screen GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create Open/Close Button for GUI (draggable)
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(0.1, 0, 0.05, 0)
+toggleButton.Position = UDim2.new(0.45, 0, 0.05, 0)
+toggleButton.Text = "AMIGOS GUI"
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggleButton.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
+toggleButton.Parent = screenGui
+toggleButton.Active = true
+toggleButton.Draggable = true
+
+-- Create the draggable frame to hold the GUI elements
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.3, 0, 0.5, 0)
+frame.Position = UDim2.new(0.35, 0, 0.3, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+frame.Visible = false
+
+-- Create a label for instructions
+local instructionsLabel = Instance.new("TextLabel")
+instructionsLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
+instructionsLabel.Position = UDim2.new(0.1, 0, 0.05, 0)
+instructionsLabel.Text = "Enter Player Nickname or Partial Name"
+instructionsLabel.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
+instructionsLabel.BackgroundTransparency = 1
+instructionsLabel.TextScaled = true
+instructionsLabel.Parent = frame
+
+-- Create Teleport to Random Player Button
+local tpRandomButton = Instance.new("TextButton")
+tpRandomButton.Size = UDim2.new(0.8, 0, 0.15, 0)
+tpRandomButton.Position = UDim2.new(0.1, 0, 0.2, 0)
+tpRandomButton.Text = "Teleport to Random Player"
+tpRandomButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- White Button
+tpRandomButton.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
+tpRandomButton.TextScaled = true
+tpRandomButton.Parent = frame
+
+-- Create TextBox for entering player nickname
+local nameTextBox = Instance.new("TextBox")
+nameTextBox.Size = UDim2.new(0.8, 0, 0.15, 0)
+nameTextBox.Position = UDim2.new(0.1, 0, 0.4, 0)
+nameTextBox.PlaceholderText = "Enter Player Nickname"
+nameTextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+nameTextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+nameTextBox.TextScaled = true
+nameTextBox.Parent = frame
+
+-- Create Teleport by Nickname Button
+local tpByNameButton = Instance.new("TextButton")
+tpByNameButton.Size = UDim2.new(0.8, 0, 0.15, 0)
+tpByNameButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+tpByNameButton.Text = "Teleport to Player by Name"
+tpByNameButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- White Button
+tpByNameButton.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
+tpByNameButton.TextScaled = true
+tpByNameButton.Parent = frame
+
+-- Create Status Label
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
+statusLabel.Position = UDim2.new(0.1, 0, 0.8, 0)
+statusLabel.Text = "Status: Waiting for input..."
+statusLabel.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
+statusLabel.BackgroundTransparency = 1
+statusLabel.TextScaled = true
+statusLabel.Parent = frame
+
+-- Function to teleport to a random player
+local function teleportToRandomPlayer()
+    local player = game.Players.LocalPlayer
+    local players = game.Players:GetPlayers()
+    
+    -- Filter to ensure you don't teleport to yourself
+    local eligiblePlayers = {}
+    for _, targetPlayer in ipairs(players) do
+        if targetPlayer ~= player and targetPlayer.Character then
+            table.insert(eligiblePlayers, targetPlayer)
+        end
+    end
+    
+    -- Check if there are eligible players
+    if #eligiblePlayers > 0 then
+        -- Select a random player
+        local randomPlayer = eligiblePlayers[math.random(1, #eligiblePlayers)]
+        local randomCharacter = randomPlayer.Character
+        local randomHumanoidRootPart = randomCharacter:WaitForChild("HumanoidRootPart")
+        
+        -- Teleport the local player to the selected player's position
+        local humanoidRootPart = player.Character:WaitForChild("HumanoidRootPart")
+        humanoidRootPart.CFrame = randomHumanoidRootPart.CFrame
+        
+        -- Update status label with the player you teleported to
+        statusLabel.Text = "Teleported to " .. randomPlayer.Name
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0) -- Green Text to indicate success
+    else
+        statusLabel.Text = "No players available for teleportation"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Red Text to indicate error
+    end
+end
+
+-- Function to teleport to a player by partial or full name
+local function teleportToPlayerByName()
+    local inputName = nameTextBox.Text:lower() -- Get the input and convert to lowercase for matching
+    local player = game.Players.LocalPlayer
+    local targetPlayer = nil
+    
+    -- Loop through all players to find a match for the nickname or partial name
+    for _, p in pairs(game.Players:GetPlayers()) do
+        if string.find(p.Name:lower(), inputName) or string.find(p.DisplayName:lower(), inputName) then
+            targetPlayer = p
+            break
+        end
+    end
+    
+    if targetPlayer and targetPlayer.Character then
+        local targetCharacter = targetPlayer.Character
+        local targetHumanoidRootPart = targetCharacter:WaitForChild("HumanoidRootPart")
+        
+        -- Teleport the local player to the target player's position
+        local humanoidRootPart = player.Character:WaitForChild("HumanoidRootPart")
+        humanoidRootPart.CFrame = targetHumanoidRootPart.CFrame
+        
+        -- Update status label with the player you teleported to
+        statusLabel.Text = "Teleported to " .. targetPlayer.Name
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0) -- Green Text to indicate success
+    else
+        statusLabel.Text = "Player not found or not in-game"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Red Text to indicate error
+    end
+end
+
+-- Connect the teleport buttons to the functions
+tpRandomButton.MouseButton1Click:Connect(teleportToRandomPlayer)
+tpByNameButton.MouseButton1Click:Connect(teleportToPlayerByName)
+
+-- Toggle Button to show/hide the main GUI
+toggleButton.MouseButton1Click:Connect(function()
+    frame.Visible = not frame.Visible -- Toggle visibility
+    if frame.Visible then
+        toggleButton.Text = "Close AMIGOS GUI"
+    else
+        toggleButton.Text = "AMIGOS GUI"
+    end
+end)
