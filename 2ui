@@ -1,0 +1,95 @@
+-- Create Screen GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create Open/Close Button (now called AMIGOS GUI and draggable)
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+toggleButton.Position = UDim2.new(0.45, 0, 0.05, 0) -- Top center of the screen
+toggleButton.Text = "AMIGOS GUI"
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Changed to black
+toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text for visibility
+toggleButton.Parent = screenGui
+toggleButton.Active = true -- To make it draggable
+toggleButton.Draggable = true -- Enable dragging
+
+-- Create the frame to hold the elements
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.3, 0, 0.4, 0)
+frame.Position = UDim2.new(0.35, 0, 0.3, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Changed to black
+frame.Active = true -- To make it draggable
+frame.Draggable = true -- Enable dragging
+frame.Parent = screenGui
+frame.Visible = false -- Initially hidden until "AMIGOS GUI" is pressed
+
+-- Create Speed Slider Label
+local speedLabel = Instance.new("TextLabel")
+speedLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
+speedLabel.Position = UDim2.new(0.1, 0, 0.1, 0)
+speedLabel.Text = "Speed:"
+speedLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text for visibility
+speedLabel.Parent = frame
+
+-- Create Speed Slider (TextBox for input)
+local speedSlider = Instance.new("TextBox")
+speedSlider.Size = UDim2.new(0.8, 0, 0.1, 0)
+speedSlider.Position = UDim2.new(0.1, 0, 0.2, 0)
+speedSlider.Text = "16" -- Default walk speed
+speedSlider.TextColor3 = Color3.fromRGB(0, 0, 0) -- Black text
+speedSlider.BackgroundColor3 = Color3.fromRGB(200, 200, 200) -- Light background
+speedSlider.Parent = frame
+
+-- Create Jump Power Label
+local jumpLabel = Instance.new("TextLabel")
+jumpLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
+jumpLabel.Position = UDim2.new(0.1, 0, 0.4, 0)
+jumpLabel.Text = "Jump Power:"
+jumpLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text for visibility
+jumpLabel.Parent = frame
+
+-- Create Jump Power Slider (TextBox for input)
+local jumpSlider = Instance.new("TextBox")
+jumpSlider.Size = UDim2.new(0.8, 0, 0.1, 0)
+jumpSlider.Position = UDim2.new(0.1, 0, 0.5, 0)
+jumpSlider.Text = "50" -- Default jump power
+jumpSlider.TextColor3 = Color3.fromRGB(0, 0, 0) -- Black text
+jumpSlider.BackgroundColor3 = Color3.fromRGB(200, 200, 200) -- Light background
+jumpSlider.Parent = frame
+
+-- Create Apply Button
+local applyButton = Instance.new("TextButton")
+applyButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+applyButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+applyButton.Text = "Apply"
+applyButton.BackgroundColor3 = Color3.fromRGB(100, 255, 100) -- Green background for Apply button
+applyButton.TextColor3 = Color3.fromRGB(0, 0, 0) -- Black text
+applyButton.Parent = frame
+
+-- Function to apply changes to speed and jump power
+applyButton.MouseButton1Click:Connect(function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- Change speed
+    local newSpeed = tonumber(speedSlider.Text) or 16 -- Default to 16 if invalid
+    humanoid.WalkSpeed = newSpeed
+
+    -- Change jump power
+    local newJumpPower = tonumber(jumpSlider.Text) or 50 -- Default to 50 if invalid
+    humanoid.JumpPower = newJumpPower
+
+    -- Optionally hide the GUI after applying the changes
+    frame.Visible = false
+end)
+
+-- Toggle Button to show/hide the main GUI
+toggleButton.MouseButton1Click:Connect(function()
+    frame.Visible = not frame.Visible -- Toggle visibility
+    if frame.Visible then
+        toggleButton.Text = "Close"
+    else
+        toggleButton.Text = "AMIGOS GUI"
+    end
+end)
