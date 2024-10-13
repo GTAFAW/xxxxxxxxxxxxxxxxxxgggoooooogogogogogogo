@@ -1,47 +1,47 @@
--- Create the Screen GUI
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+-创建屏幕GUI
+local screen GUI = instance . new(" screen GUI ")
+screenGui。家长=游戏。players . local player:WaitForChild(" player GUI ")
 
--- Create Open/Close Button for GUI (draggable)
-local toggleButton = Instance.new("TextButton")
-toggleButton.Size = UDim2.new(0.1, 0, 0.05, 0)
-toggleButton.Position = UDim2.new(0.45, 0, 0.05, 0)
-toggleButton.Text = "AMIGOS GUI"
-toggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-toggleButton.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
-toggleButton.Parent = screenGui
-toggleButton.Active = true
-toggleButton.Draggable = true
+-为GUI创建打开/关闭按钮(可拖动)
+local toggle button = instance . new(" text button ")
+切换按钮。Size = UDim2.new(0.1，0，0.05，0)
+切换按钮。Position = UDim2.new(0.45，0，0.05，0)
+切换按钮。Text = "xgo"
+切换按钮。background color 3 = color 3 . from RGB(0，0，0)
+切换按钮。TextColor3 = Color3.fromRGB(144，238，144) -浅绿色文本
+切换按钮。Parent = screenGui
+切换按钮。活动=真
+切换按钮。Draggable = true
 
--- Create the draggable frame to hold the GUI elements
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0.3, 0, 0.5, 0)
-frame.Position = UDim2.new(0.35, 0, 0.3, 0)
-frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-frame.Active = true
-frame.Draggable = true
-frame.Parent = screenGui
-frame.Visible = false
+-创建可拖动的框架来容纳GUI元素
+local frame = Instance.new("Frame ")
+框架。Size = UDim2.new(0.3，0，0.5，0)
+框架。Position = UDim2.new(0.35，0，0.3，0)
+框架。background color 3 = color 3 . from RGB(0，0，0)
+框架。活动=真
+框架。Draggable = true
+框架。Parent = screenGui
+框架。可见=假
 
--- Create a label for instructions
-local instructionsLabel = Instance.new("TextLabel")
-instructionsLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
-instructionsLabel.Position = UDim2.new(0.1, 0, 0.05, 0)
-instructionsLabel.Text = "Enter Player Nickname or Partial Name"
-instructionsLabel.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
-instructionsLabel.BackgroundTransparency = 1
-instructionsLabel.TextScaled = true
-instructionsLabel.Parent = frame
+-创建说明标签
+local instructions label = instance . new(" TextLabel ")
+说明标签。Size = UDim2.new(0.8，0，0.1，0)
+说明标签。Position = UDim2.new(0.1，0，0.05，0)
+说明标签。Text = "输入玩家昵称或部分姓名"
+说明标签。TextColor3 = Color3.fromRGB(144，238，144) -浅绿色文本
+说明标签。BackgroundTransparency = 1
+说明标签。TextScaled = true
+说明标签。父代=框架
 
--- Create Teleport to Random Player Button
-local tpRandomButton = Instance.new("TextButton")
-tpRandomButton.Size = UDim2.new(0.8, 0, 0.15, 0)
-tpRandomButton.Position = UDim2.new(0.1, 0, 0.2, 0)
-tpRandomButton.Text = "Teleport to Random Player"
-tpRandomButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- White Button
-tpRandomButton.TextColor3 = Color3.fromRGB(144, 238, 144) -- Light Green Text
-tpRandomButton.TextScaled = true
-tpRandomButton.Parent = frame
+-创建传送到随机玩家按钮
+local tpRandomButton = instance . new(" text button ")
+tpRandomButton。Size = UDim2.new(0.8，0，0.15，0)
+tpRandomButton。Position = UDim2.new(0.1，0，0.2，0)
+tpRandomButton。Text = "传送到随机玩家"
+tpRandomButton。background color 3 = color 3 . from RGB(255，255，255) -白色按钮
+tpRandomButton。TextColor3 = Color3.fromRGB(144，238，144) -浅绿色文本
+tpRandomButton。TextScaled = true
+tpRandomButton。父代=框架
 
 -- Create TextBox for entering player nickname
 local nameTextBox = Instance.new("TextBox")
