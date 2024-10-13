@@ -7,7 +7,7 @@ local function createESPGui(player)
     local mainFrame = Instance.new("Frame")
     mainFrame.Size = UDim2.new(0, 200, 0, 100)
     mainFrame.Position = UDim2.new(0.5, -100, 0.1, 0) -- Centered on the screen
-    mainFrame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    mainFrame.BackgroundColor3 = Color3.new(1, 1, 1)
     mainFrame.Active = true
     mainFrame.Draggable = true -- Enable dragging
     mainFrame.Parent = screenGui
@@ -16,27 +16,27 @@ local function createESPGui(player)
     local toggleButton = Instance.new("TextButton")
     toggleButton.Size = UDim2.new(0.8, 0, 0.3, 0)
     toggleButton.Position = UDim2.new(0.1, 0, 0.1, 0)
-    toggleButton.Text = "Toggle ESP"
+    toggleButton.Text = "3D射线开/关 xgo"
     toggleButton.TextColor3 = Color3.new(1, 1, 1)
-    toggleButton.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+    toggleButton.BackgroundColor3 = Color3.new(1, 0.8, 0.8)
     toggleButton.Parent = mainFrame
 
     -- Status label to show if ESP is on or off
     local statusLabel = Instance.new("TextLabel")
     statusLabel.Size = UDim2.new(0.8, 0, 0.2, 0)
     statusLabel.Position = UDim2.new(0.1, 0, 0.6, 0)
-    statusLabel.Text = "ESP: OFF"
+    statusLabel.Text = "ESP:开/关"
     statusLabel.TextColor3 = Color3.new(1, 0, 0)
     statusLabel.BackgroundTransparency = 1
     statusLabel.Parent = mainFrame
 
     -- Open button (styled to look cylindrical)
     local openCloseButton = Instance.new("TextButton")
-    openCloseButton.Size = UDim2.new(0, 100, 0, 50)
-    openCloseButton.Position = UDim2.new(0.5, -50, 0.8, 0) -- Centered on the screen
-    openCloseButton.Text = "AMIGOS GUI V2" -- Updated button text
+    openCloseButton.Size = UDim2.new(0, 80, 0, 40)
+    openCloseButton.Position = UDim2.new(0.5, -40, 0.8, 0) -- Centered on the screen
+    openCloseButton.Text = "xgo 关闭ui" -- Updated button text
     openCloseButton.TextColor3 = Color3.new(0.5, 1, 0.5) -- Light green text
-    openCloseButton.BackgroundColor3 = Color3.new(0, 0, 0) -- Black background
+    openCloseButton.BackgroundColor3 = Color3.new(1, 1, 1) -- Black background
     openCloseButton.Parent = screenGui
 
     -- Make the button look cylindrical
@@ -73,7 +73,7 @@ local function createESPGui(player)
         -- Create BillboardGui for displaying player name above head
         local billboard = Instance.new("BillboardGui")
         billboard.Adornee = character:WaitForChild("Head") -- Attach above the player's head
-        billboard.Size = UDim2.new(10, 0, 3, 0) -- Increase the size of the BillboardGui
+        billboard.Size = UDim2.new(5, 0, 1.5, 0) -- Increase the size of the BillboardGui
         billboard.StudsOffset = Vector3.new(0, 3, 0) -- Position above head
         billboard.AlwaysOnTop = true -- Ensure it's always visible on top
         billboard.Parent = character
@@ -83,7 +83,7 @@ local function createESPGui(player)
         textLabel.Size = UDim2.new(1, 0, 1, 0)
         textLabel.BackgroundTransparency = 1 -- Make it transparent
         textLabel.Text = targetPlayer.Name -- Display the player's name
-        textLabel.TextColor3 = Color3.new(1, 1, 1) -- White text
+        textLabel.TextColor3 = Color3.new(1, 0.8, 0.8) -- White text
         textLabel.TextStrokeTransparency = 0.5 -- Adds a stroke to make the text readable
         textLabel.TextScaled = true -- Automatically scale the text to fit the size of the TextLabel
         textLabel.Font = Enum.Font.SourceSansBold -- Set a bold font for emphasis
@@ -91,7 +91,7 @@ local function createESPGui(player)
 
         -- Create a beam to connect to the player
         local beam = Instance.new("Beam")
-        beam.Color = ColorSequence.new(Color3.new(0.5, 1, 0.5)) -- Light green color
+        beam.Color = ColorSequence.new(Color3.new(1, 0.8, 0.8)) -- Light green color
         beam.Width0 = 0.2 -- Starting width of the beam
         beam.Width1 = 0.2 -- Ending width of the beam
         beam.Segments = 10 -- Number of segments in the beam for smoothness
@@ -127,14 +127,14 @@ local function createESPGui(player)
     local function toggleESP()
         espEnabled = not espEnabled -- Toggle the ESP state
         if espEnabled then
-            statusLabel.Text = "ESP: ON"
+            statusLabel.Text = "xgo:开启"
             statusLabel.TextColor3 = Color3.new(0, 1, 0) -- Green for ON
             -- Add ESP for all players except the player themselves
             for _, targetPlayer in pairs(game.Players:GetPlayers()) do
                 createESPforTorso(targetPlayer)
             end
         else
-            statusLabel.Text = "ESP: OFF"
+            statusLabel.Text = "xgo:关闭"
             statusLabel.TextColor3 = Color3.new(1, 0, 0) -- Red for OFF
             removeAllESP() -- Remove all ESP elements when ESP is turned off
         end
