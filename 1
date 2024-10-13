@@ -1,0 +1,185 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local Close = Instance.new("TextButton")
+local Open2 = Instance.new("ScreenGui")
+local Open = Instance.new("TextButton")
+local FightingGui = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local ScrollFrame = Instance.new("ScrollingFrame")
+local TitleLabel = Instance.new("TextLabel")
+local HitBox = Instance.new("TextBox")
+local Red = Instance.new("TextBox")
+local Green = Instance.new("TextBox")
+local ColorLabel = Instance.new("TextLabel")
+local YTButton = Instance.new("TextButton") -- Added AMIGOS YT button
+
+--Properties:
+
+FightingGui.Name = "FightingGui"
+FightingGui.Parent = game.CoreGui
+FightingGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Open2.Name = "Tools"
+Open2.Parent = game.CoreGui
+Open2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Open.Name = "Open"
+Open.Parent = Open2
+Open.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+Open.Position = UDim2.new(0, 0, 0.451871663, 0)
+Open.Size = UDim2.new(0, 78, 0, 50)
+Open.Font = Enum.Font.SourceSans
+Open.Text = "Open"
+Open.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+Open.TextScaled = true
+Open.TextSize = 14.000
+Open.TextWrapped = true
+Open.MouseButton1Down:Connect(function()
+    FightingGui.Enabled = true
+end)
+
+Close.Name = "Close"
+Close.Parent = main
+Close.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+Close.Position = UDim2.new(0, -60, 0, 0) -- Adjusted close button position to top left
+Close.Size = UDim2.new(0, 60, 0, 50)
+Close.Font = Enum.Font.SourceSans
+Close.Text = "X"
+Close.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+Close.TextScaled = true
+Close.TextSize = 14.000
+Close.TextWrapped = true
+Close.MouseButton1Down:Connect(function()
+    FightingGui.Enabled = false
+end)
+
+main.Parent = FightingGui
+main.Active = true
+main.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+main.Position = UDim2.new(0.073011741, 0, 0.237333342, 0)
+main.Size = UDim2.new(0, 273, 0, 221)
+main.Draggable = true -- Make the main GUI draggable
+
+-- Scrolling Frame
+ScrollFrame.Parent = main
+ScrollFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+ScrollFrame.Position = UDim2.new(0, 0, 0, 0)
+ScrollFrame.Size = UDim2.new(1, 0, 1, 0)
+ScrollFrame.CanvasSize = UDim2.new(0, 0, 2, 0) -- Set the scrolling content size
+ScrollFrame.ScrollBarThickness = 10
+
+-- Title Label
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = ScrollFrame
+TitleLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+TitleLabel.Position = UDim2.new(0, 0, 0, 0)
+TitleLabel.Size = UDim2.new(0, 273, 0, 50)
+TitleLabel.Font = Enum.Font.SourceSans
+TitleLabel.Text = "AMIGOS GUI"
+TitleLabel.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+TitleLabel.TextScaled = true
+TitleLabel.TextSize = 14.000
+TitleLabel.TextWrapped = true
+
+HitBox.Name = "HitBox"
+HitBox.Parent = ScrollFrame
+HitBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+HitBox.Position = UDim2.new(0.0586080588, 0, 0.15, 0)
+HitBox.Size = UDim2.new(0, 65, 0, 50)
+HitBox.Font = Enum.Font.SourceSans
+HitBox.PlaceholderColor3 = Color3.fromRGB(0, 255, 0) -- Placeholder text color set to green
+HitBox.PlaceholderText = "Hitbox"
+HitBox.Text = ""
+HitBox.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+HitBox.TextScaled = true
+HitBox.TextSize = 14.000
+HitBox.TextWrapped = true
+
+Red.Name = "Red"
+Red.Parent = ScrollFrame
+Red.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+Red.Position = UDim2.new(0.485832304, 0, 0.15, 0)
+Red.Size = UDim2.new(0, 37, 0, 50)
+Red.Font = Enum.Font.SourceSans
+Red.PlaceholderColor3 = Color3.fromRGB(0, 255, 0) -- Placeholder text color set to green
+Red.PlaceholderText = "Red"
+Red.Text = ""
+Red.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+Red.TextSize = 14.000
+
+Green.Name = "Green"
+Green.Parent = ScrollFrame
+Green.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+Green.Position = UDim2.new(0.665319502, 0, 0.15, 0)
+Green.Size = UDim2.new(0, 37, 0, 50)
+Green.Font = Enum.Font.SourceSans
+Green.PlaceholderColor3 = Color3.fromRGB(0, 255, 0) -- Placeholder text color set to green
+Green.PlaceholderText = "Green"
+Green.Text = ""
+Green.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+Green.TextSize = 14.000
+
+-- Color Label
+ColorLabel.Parent = ScrollFrame
+ColorLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+ColorLabel.Position = UDim2.new(0.47118023, 0, 0.35, 0)
+ColorLabel.Size = UDim2.new(0, 140, 0, 37)
+ColorLabel.Font = Enum.Font.SourceSans
+ColorLabel.Text = "Colors"
+ColorLabel.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+ColorLabel.TextScaled = true
+ColorLabel.TextSize = 14.000
+ColorLabel.TextWrapped = true
+
+-- AMIGOS YT Button
+YTButton.Name = "YTButton"
+YTButton.Parent = ScrollFrame
+YTButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Background changed to black
+YTButton.Position = UDim2.new(0.2, 0, 0.65, 0) -- Positioning at the bottom of the GUI
+YTButton.Size = UDim2.new(0, 140, 0, 50)
+YTButton.Font = Enum.Font.SourceSans
+YTButton.Text = "AMIGOS YT"
+YTButton.TextColor3 = Color3.fromRGB(0, 255, 0) -- Text changed to green
+YTButton.TextScaled = true
+YTButton.TextSize = 14.000
+YTButton.TextWrapped = true
+YTButton.MouseButton1Down:Connect(function()
+    -- Copy the YouTube link to the clipboard
+    setclipboard("https://youtube.com/@hyperfanny?si=F3Wo5bXfQpUuyw3p")
+end)
+
+-- Make the Open button draggable
+Open.MouseButton1Down:Connect(function()
+    local userInputService = game:GetService("UserInputService")
+    local startPos = userInputService:GetMouse().Position
+    local startGuiPos = main.Position
+
+    userInputService.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            local delta = userInputService:GetMouse().Position - startPos
+            main.Position = UDim2.new(startGuiPos.X.Scale, startGuiPos.X.Offset + delta.X, startGuiPos.Y.Scale, startGuiPos.Y.Offset + delta.Y)
+        end
+    end)
+end)
+
+-- RunService Logic
+game:GetService('RunService').RenderStepped:connect(function()
+    for i,v in next, game:GetService('Players'):GetPlayers() do
+        if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+            if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+                v.Character.HumanoidRootPart.Size = Vector3.new(tonumber(HitBox.Text) or 1, tonumber(HitBox.Text) or 1, tonumber(HitBox.Text) or 1) -- Use tonumber to ensure valid number
+                v.Character.HumanoidRootPart.Transparency = 0.8
+                v.Character.HumanoidRootPart.Color = Color3.new(
+                    tonumber(Red.Text) or 0,
+                    tonumber(Green.Text) or 0,
+                    0 -- No Blue since it's been removed
+                )
+                v.Character.HumanoidRootPart.Material = "Neon"
+                v.Character.HumanoidRootPart.CanCollide = false
+            end
+        end
+    end
+end)
